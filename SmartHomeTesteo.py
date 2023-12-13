@@ -25,3 +25,23 @@ def cargarUsuarios():
     print("Cargar usuarios:", usuarios)
     print("Los usuarios se cargaron CORRECTAMENTE")
     return usuarios
+def agregarInfoUsuario():
+    print("\n--- Registro de Nuevo Usuario ---")
+    usuarios = []
+
+    while True:
+        nombre = input("Ingrese su nombre: ")
+        correo = input("Ingrese su correo electrónico: ")
+        pin = input("Ingrese su PIN: ")
+
+        nuevoUsuario = {"Nombre": nombre, "Correo": correo, "PIN": pin, "Casas": []} #casas es un lista vacía que se iniciliza x esta linea
+        usuarios.append(nuevoUsuario)
+        print("¡Usuario registrado exitosamente!")
+
+        guardarUsuarios(usuarios)
+        break
+
+def guardarUsuarios(usuarios):
+    with open("usuarios.txt", "a+") as file: 
+        for usuario in usuarios: # cada dicionmario representa un usuario, for diccionario in usuarios
+            file.write(f"{usuario['Nombre']},{usuario['Correo']},{usuario['PIN']
