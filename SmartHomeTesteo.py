@@ -62,7 +62,57 @@ def consultarInfoPorPIN():
 
 def imprimirInfoUsuario(usuario):
     print("\nInformación del usuario:")
-    print(usuario)                                                                  
+    print(usuario)        
+
+def agregarHabitacionDispositivos():
+    usuarios = cargarUsuarios()
+    
+    if not usuarios:
+        print("No hay usuarios registrados. Registre un usuario primero.")
+        return
+
+    usuarioActual = usuarios[-1]  # Obtén el último usuario
+
+    casas = []
+
+    while True:
+        casa = []
+        casa.append(input("Ingrese el nombre de la casa: "))  # El primer elemento es el nombre de la casa
+        habitaciones = []
+
+        while True:
+            habitacion = []
+            habitacion.append(input("Ingrese el nombre de la habitacion: "))  # El primer elemento es el nombre de la habitacion
+            dispositivos = []
+
+            while True:
+                dispositivo = []
+                dispositivo.append(input("Ingrese el nombre del dispositivo: "))
+                dispositivo.append(input("Ingrese el estado del dispositivo (Encendido/Apagado): "))
+                dispositivos.append(dispositivo)
+
+                opcionDispositivo = input("¿Desea agregar otro dispositivo a esta habitacion? (1=Si, Otra tecla=No): ")
+                if opcionDispositivo != "1":
+                    break
+
+            habitacion.append(dispositivos)
+            habitaciones.append(habitacion)
+
+            opcionHabitacion = input("¿Desea agregar otra habitación a esta casa? (1=Sí, Otra tecla=No): ")
+            if opcionHabitacion != "1":
+                break
+
+        casa.append(habitaciones)
+        casas.append(casa)
+
+        opcionCasa = input("¿Desea agregar otra casa? (1=Sí, Otra tecla=No): ")
+        if opcionCasa != "1":
+            break
+
+    usuarioActual["Casas"] = casas  # Asigna la lista de casas al último usuario
+    guardarUsuarios(usuarios)
+    print("\n---¡Archivo de habitaciones y dispositivos creado correctamente---\n")
+    
                                                                   
 cargarUsuarios()
 while True:
